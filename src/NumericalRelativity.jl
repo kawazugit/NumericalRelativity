@@ -6,7 +6,13 @@ module NumericalRelativity
 # T[-1,-1] means lower-lower indices and T[1,1] means up-up
 # You should be able to find the Rank of tensors
 # Contracting is possible? At least with a function contract
-#
+
+using Symbolics
+
+function partial(tensor, coords)
+	[(expand_derivatives∘Differential(coord))(tencom) for coord ∈ coords, tencom ∈ tensor]
+end
+
 # Metric should be a rank two tensor
 #
 # partial gives back the symbols ∂T
